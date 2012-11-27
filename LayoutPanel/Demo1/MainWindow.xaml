@@ -1,0 +1,63 @@
+﻿<Window x:Class="Demo1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Controls="clr-namespace:Controls;assembly=Controls" 
+        xmlns:System="clr-namespace:System;assembly=mscorlib" Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Grid.Resources>
+            <x:Array x:Key="Panels" Type="ItemsPanelTemplate">
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Vertical"/>
+                </ItemsPanelTemplate>
+                <ItemsPanelTemplate>
+                    <WrapPanel ItemHeight="50" ItemWidth="50"/>
+                </ItemsPanelTemplate>
+                <ItemsPanelTemplate>
+                    <Controls:RadialPanel/>
+                </ItemsPanelTemplate>
+                <ItemsPanelTemplate>
+                    <DockPanel/>
+                </ItemsPanelTemplate>
+                <ItemsPanelTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+                <ItemsPanelTemplate>
+                    <Canvas/>
+                </ItemsPanelTemplate>
+            </x:Array>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="80"/>
+        </Grid.ColumnDefinitions>
+        <Controls:AnimatedLayoutPanel x:Name="LayoutPanel" Panel="{Binding ElementName=PanelsListBox, Path=SelectedItem.Tag}">
+        </Controls:AnimatedLayoutPanel>
+        <StackPanel Orientation="Vertical" Grid.Column="1">
+            <CheckBox Content="Animate" IsChecked="{Binding ElementName=LayoutPanel, Path=IsAnimated}"/>
+            <Button Content="Add Child" Click="Add_Click"/>
+            <Button Content="Remove Child" Click="Remove_Click"/>
+            <ListBox SelectedIndex="0" x:Name="PanelsListBox" Height="200">
+                <ListBoxItem Content="Stack Horixontal" Tag="{Binding Source={StaticResource Panels}, Path=[0]}"/>
+                <ListBoxItem Content="Stack vertical" Tag="{Binding Source={StaticResource Panels}, Path=[1]}"/>
+                <ListBoxItem Content="WrapPanel" Tag="{Binding Source={StaticResource Panels}, Path=[2]}"/>
+                <ListBoxItem Content="RadialPanel" Tag="{Binding Source={StaticResource Panels}, Path=[3]}"/>
+                <ListBoxItem Content="DockPanel" Tag="{Binding Source={StaticResource Panels}, Path=[4]}"/>
+                <ListBoxItem Content="Grid" Tag="{Binding Source={StaticResource Panels}, Path=[5]}"/>
+                <ListBoxItem Content="Canvas" Tag="{Binding Source={StaticResource Panels}, Path=[6]}"/>
+            </ListBox>
+        </StackPanel>
+
+    </Grid>
+</Window>
